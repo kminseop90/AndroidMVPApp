@@ -58,6 +58,10 @@ public class MainActivity extends BaseActivity implements MainView {
         mainPresenter.showPopup();
     }
 
+    public void onAddClick(View view) {
+        mainPresenter.addUser();
+    }
+
     @Override
     protected void onDestroy() {
         mainPresenter.detachView();

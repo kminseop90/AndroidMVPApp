@@ -33,9 +33,16 @@
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textview"
             android:onClick="@{mainactivity::onMessageClick}"
             android:text="Click!!!!" />
+
+        <Button
+            android:id="@+id/add_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{mainactivity::onAddClick}"
+            android:text="add" />
+
 
         <ImageView
             android:id="@+id/imageview"

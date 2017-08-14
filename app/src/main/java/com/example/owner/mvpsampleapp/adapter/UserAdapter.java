@@ -20,6 +20,7 @@ public class UserAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     public void setUser(ArrayList<User> users) {
         this.users.clear();
         this.users.addAll(users);
+        notifyDataSetChanged();
     }
 
     @Override

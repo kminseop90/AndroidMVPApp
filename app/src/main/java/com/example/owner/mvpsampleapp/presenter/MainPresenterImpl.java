@@ -1,15 +1,13 @@
 package com.example.owner.mvpsampleapp.presenter;
 
 import com.example.owner.mvpsampleapp.R;
-import com.example.owner.mvpsampleapp.model.vo.User;
-
-import java.util.ArrayList;
-
-/**
- * Created by Owner on 2017-01-31
- */
+import com.example.owner.mvpsampleapp.model.UserModel;
+import com.example.owner.mvpsampleapp.model.UserModelImpl;
+import com.example.owner.mvpsampleapp.view.MainActivity;
 
 public class MainPresenterImpl extends MainPresenter {
+
+    UserModel userModel;
 
     @Override
     public void showMessage() {
@@ -21,12 +19,7 @@ public class MainPresenterImpl extends MainPresenter {
     @Override
     public void showUsers() {
         if(isAttachView()) {
-            ArrayList<User> users = new ArrayList<>();
-            for(int i = 0 ; i < 100; i++) {
-                User user = new User(i, "name : " + i, "phone : " +  i);
-                users.add(user);
-            }
-            view().showUsers(users);
+            view().showUsers(userModel.getUsers());
         }
     }
 
@@ -37,4 +30,17 @@ public class MainPresenterImpl extends MainPresenter {
         }
     }
 
+    @Override
+    public void addUser() {
+        if(isAttachView()) {
+            userModel.addUser();
+            view().showUsers(userModel.getUsers());
+        }
+    }
+
+
+    @Override
+    public void afterAttachView() {
+        userModel = new UserModelImpl(((MainActivity)view()));
+    }
 }

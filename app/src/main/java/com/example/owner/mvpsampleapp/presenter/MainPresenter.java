@@ -11,6 +11,7 @@ public abstract class MainPresenter extends BasePresenter<MainView> {
     public abstract void showMessage();
     public abstract void showUsers();
     public abstract void showPopup();
+    public abstract void addUser();
 
 
 }
