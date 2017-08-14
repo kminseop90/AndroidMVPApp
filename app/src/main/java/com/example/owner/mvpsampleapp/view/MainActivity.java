@@ -1,52 +1,63 @@
 package com.example.owner.mvpsampleapp.view;
 
-import android.content.ComponentName;
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
 import com.example.owner.mvpsampleapp.R;
+import com.example.owner.mvpsampleapp.adapter.UserAdapter;
 import com.example.owner.mvpsampleapp.base.BaseActivity;
 import com.example.owner.mvpsampleapp.databinding.ActivityMainBinding;
+import com.example.owner.mvpsampleapp.model.vo.User;
+import com.example.owner.mvpsampleapp.presenter.MainPresenter;
 import com.example.owner.mvpsampleapp.presenter.MainPresenterImpl;
+import com.squareup.picasso.Picasso;
 
-public class MainActivity extends BaseActivity implements MainView{
+import java.util.ArrayList;
 
-    private MainPresenterImpl mainPresenter = new MainPresenterImpl();
-    ActivityMainBinding activityMainBinding;
+public class MainActivity extends BaseActivity implements MainView {
+
+    private MainPresenter mainPresenter = new MainPresenterImpl();
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        activityMainBinding.textview.setText("Hi");
-
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        binding.setMainactivity(this);
         init();
-        activityMainBinding.button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mainPresenter.updateMessage();
-            }
-        });
     }
 
     private void init() {
         mainPresenter.attchView(this);
+        binding.textview.setText("Hi");
 
-
+        binding.userList.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+        binding.userList.setAdapter(new UserAdapter());
+        mainPresenter.showUsers();
     }
 
 
     @Override
-    public void showMessage(String message) {
+    public void showUsers(ArrayList<User> users) {
+        ((UserAdapter) binding.userList.getAdapter()).setUser(users);
+    }
 
-        ComponentName componentName = new ComponentName("kr.co.kyowon.ktelepathy", "kr.co.kyowon.ktelepathy.IntroActivity");
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.putExtra("flag", false);
-        intent.addCategory(Intent.CATEGORY_LAUNCHER);
-        intent.setComponent(componentName);
-        startActivity(intent);
-        activityMainBinding.textview.setText(message);
+
+    public void onMessageClick(View v) {
+        mainPresenter.showMessage();
+    }
+
+    @Override
+    public void showMessage(String message, int image) {
+        binding.textview.setText(message);
+        Picasso.with(MainActivity.this).load(image).into(binding.imageview);
+    }
+
+    @Override
+    protected void onDestroy() {
+        mainPresenter.detachView();
+        super.onDestroy();
     }
 }

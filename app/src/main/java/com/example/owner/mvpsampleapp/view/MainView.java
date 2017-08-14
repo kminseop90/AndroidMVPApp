@@ -1,6 +1,9 @@
 package com.example.owner.mvpsampleapp.view;
 
 import com.example.owner.mvpsampleapp.base.BaseView;
+import com.example.owner.mvpsampleapp.model.vo.User;
+
+import java.util.ArrayList;
 
 /**
  * Created by Owner on 2017-01-31.
@@ -8,5 +11,6 @@ import com.example.owner.mvpsampleapp.base.BaseView;
 
 public interface MainView extends BaseView {
 
-    public void showMessage(String message);
+    void showMessage(String message, int image);
+    void showUsers(ArrayList<User> users);
 }

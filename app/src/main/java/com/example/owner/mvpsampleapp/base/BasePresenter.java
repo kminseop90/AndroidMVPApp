@@ -20,4 +20,8 @@ public class BasePresenter<VIEW extends BaseView> {
         return view;
     }
 
+    public boolean isAttachView() {
+        return view() != null;
+    }
+
 }
