@@ -6,5 +6,5 @@ package com.example.owner.mvpsampleapp.base;
 
 public interface BaseView {
 
-    public void onNetworkError();
+    void onNetworkError();
 }

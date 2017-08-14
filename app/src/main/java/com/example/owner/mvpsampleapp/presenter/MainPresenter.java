@@ -10,6 +10,7 @@ import com.example.owner.mvpsampleapp.view.MainView;
 public abstract class MainPresenter extends BasePresenter<MainView> {
     public abstract void showMessage();
     public abstract void showUsers();
+    public abstract void showPopup();
 
 
 }

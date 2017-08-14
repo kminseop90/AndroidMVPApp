@@ -30,5 +30,11 @@ public class MainPresenterImpl extends MainPresenter {
         }
     }
 
+    @Override
+    public void showPopup() {
+        if(isAttachView()) {
+            view().onNetworkError();
+        }
+    }
 
 }

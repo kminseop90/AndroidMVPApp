@@ -33,15 +33,14 @@ public class MainActivity extends BaseActivity implements MainView {
         mainPresenter.attchView(this);
         binding.textview.setText("Hi");
 
-        binding.userList.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-        binding.userList.setAdapter(new UserAdapter());
+        binding.users.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+        binding.users.setAdapter(new UserAdapter());
         mainPresenter.showUsers();
     }
 
-
     @Override
     public void showUsers(ArrayList<User> users) {
-        ((UserAdapter) binding.userList.getAdapter()).setUser(users);
+        ((UserAdapter) binding.users.getAdapter()).setUser(users);
     }
 
 
@@ -53,6 +52,10 @@ public class MainActivity extends BaseActivity implements MainView {
     public void showMessage(String message, int image) {
         binding.textview.setText(message);
         Picasso.with(MainActivity.this).load(image).into(binding.imageview);
+    }
+
+    public void onImageClick(View view) {
+        mainPresenter.showPopup();
     }
 
     @Override
